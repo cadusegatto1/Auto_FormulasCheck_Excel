@@ -1,18 +1,18 @@
 import xlwings as xw
 import pandas as pd
 
-# Função para garantir que as fórmulas comecem com '='
+# Function to ensure formulas start with '='
 def ensure_formula(formula):
     return '=' + formula if formula and not formula.startswith('=') else formula
 
-# Função geral para comparar fórmulas entre duas planilhas
+# General function to compare formulas between two worksheets
 def compare_formulas(ws_matriz, ws_check, cell_pairs, differences, sheet_name):
     for ref_matriz, ref_check in cell_pairs:
-        # Obter e garantir que a fórmula tenha o sinal '='
+        # Get the formula and ensure it has the '=' sign
         formula_matriz = ensure_formula(ws_matriz.range(ref_matriz).formula)
         formula_check = ensure_formula(ws_check.range(ref_check).formula)
 
-        # Comparar fórmulas e registrar diferenças, se houver
+        # Compare formulas and log differences if they exist
         if formula_matriz != formula_check:
             differences.append({
                 'Sheet': sheet_name,
@@ -22,63 +22,65 @@ def compare_formulas(ws_matriz, ws_check, cell_pairs, differences, sheet_name):
                 'Check Formula': formula_check
             })
 
-# Função para aplicar a comparação de fórmulas para ambos mapeamentos de colunas e linhas de orçamento
+# Function to apply formula comparison for both budget and column mapping
 def compare_formulas_in_sheet(ws_matriz, wb_check, sheet_name, column_mapping, row_matriz, row_check, differences):
     print(f"Comparando {sheet_name}")
     ws_check = wb_check.sheets[sheet_name]
 
-    # Definir pares de células para comparação de fórmulas de orçamento
+    # Define cell pairs for budget formula comparison
     budget_cell_pairs = [
-        (f'A{row_matriz}', 'B2'),  # Orçamento Total
-        (f'B{row_matriz}', 'C2'),  # Orçamento Usado
-        (f'C{row_matriz}', 'D2')   # Orçamento Restante
+        (f'A{row_matriz}', 'B2'),  # Total Budget
+        (f'B{row_matriz}', 'C2'),  # Budget Used
+        (f'C{row_matriz}', 'D2')   # Remaining Budget
     ]
-    # Comparar fórmulas de orçamento
+    # Compare budget formulas
     compare_formulas(ws_matriz, ws_check, budget_cell_pairs, differences, sheet_name)
 
-    # Criar pares de células para comparação de mapeamento de colunas
+    # Create cell pairs for column mapping comparison
     column_cell_pairs = [(f'{col_matriz}{row_matriz}', f'{col_check}{row_check}') 
                          for col_matriz, col_check in column_mapping.items()]
-    # Comparar fórmulas de colunas
+    # Compare column formulas
     compare_formulas(ws_matriz, ws_check, column_cell_pairs, differences, sheet_name)
 
-# Função principal para realizar a comparação e salvar o relatório
+# Main function to perform the comparison and save the report
 def main():
-    # Carregar arquivos fictícios
-    wb_matriz = xw.Book('C:\\Users\\your_user\\Desktop\\Formula Checks\\Matriz Ficticia.xlsx')
-    ws_matriz = wb_matriz.sheets['Planilha1']
+    # Load fictional files
+    wb_matriz = xw.Book('C:\\Users\\your_user\\Desktop\\Formula Checks\\Matriz_Ficticia.xlsx')  # Change the path and filename here
+    ws_matriz = wb_matriz.sheets['Planilha1']  # Change the sheet name if needed
 
-    wb_check = xw.Book('C:\\Users\\your_user\\Desktop\\Formula Checks\\Verificacao Ficticia.xlsx')
+    wb_check = xw.Book('C:\\Users\\your_user\\Desktop\\Formula Checks\\Verificacao_Ficticia.xlsx')  # Change the path and filename here
 
-    # Mapeamento de Colunas: [Colunas da Matriz Ficticia , Colunas da Verificacao Ficticia]
+    # Column Mapping: [Fictitious Matrix Columns, Fictitious Check Columns]
     column_mapping = {
-        'A': 'B',  # 'Total Orçamento'
-        'B': 'C',  # 'Orçamento Usado'
-        'C': 'D',  # 'Orçamento Restante'
-        'D': 'E',  # 'Churn Rate'
-        'E': 'F',  # 'Taxa de Crescimento'
+        'A': 'B',  # 'Total Budget' - change as needed
+        'B': 'C',  # 'Budget Used' - change as needed
+        'C': 'D',  # 'Remaining Budget' - change as needed
+        'D': 'E',  # 'Churn Rate' - change as needed
+        'E': 'F',  # 'Growth Rate' - change as needed
     }
 
-    # Lista para armazenar diferenças
+    # List to store differences
     differences = []
 
-    # Aplicar comparação a todas as abas
+    # Apply comparison to all specified sheets
     sheets_to_compare = {
-        'ABAS 1': 3, 'ABAS 2': 4, 'ABAS 3': 5
+        'ABAS 1': 3, 
+        'ABAS 2': 4, 
+        'ABAS 3': 5
     }
 
     for sheet_name, row_matriz in sheets_to_compare.items():
         compare_formulas_in_sheet(ws_matriz, wb_check, sheet_name, column_mapping, row_matriz, row_check=2, differences=differences)
 
-    # Criar um DataFrame com as diferenças
+    # Create a DataFrame with the differences
     df_differences = pd.DataFrame(differences)
     
-    # Salvar o relatório em um arquivo Excel separado
-    output_file = 'C:\\Users\\your_user\\Desktop\\Formula Checks\\comparacao_formulas.xlsx'
+    # Save the report to a separate Excel file
+    output_file = 'C:\\Users\\your_user\\Desktop\\Formula Checks\\comparacao_formulas.xlsx'  # Change the path and filename here
     df_differences.to_excel(output_file, index=False)
 
     print(f"Relatório gerado com sucesso em: {output_file}")
 
-# Executando a função principal
+# Executing the main function
 if __name__ == "__main__":
     main()
