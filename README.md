@@ -66,15 +66,8 @@ If differences are found in the formulas between the Matrix and Check sheets, th
 - **Matrix**: `Source_Formulas.xlsx`
 - **Check**: `Check.xlsx`
 
-3. Run the script. It will loop through the mapped columns in the following tabs:
-- `MANAGER`
-- `ANZ`
-- `Check GSA`
-- `CHINA`
-- `INDIA`
-- `JAPAN`
-- `SEAK`
-- `Check LAE`
+3. Run the script. It will loop through the mapped columns in the tabs contained in the sheets.
+-	If something was changed, you will need to check if the tabs name is the same.
 
 4. After execution, the difference report will be saved in the following location:
 - `C:\\Users\\your_user\\Desktop\\Formula Checks\\comparison_formulas.xlsx`
