@@ -64,7 +64,7 @@ If differences are found in the formulas between the Matrix and check sheets, th
 
 2. Open the script and adjust the paths of the Excel files you want to compare:
 - **Matrix**: `QR improvements for FY25 H1.xlsx`
-- **check**: `FY25H1 check Quota Relief Calculator - TEMPLATE.xlsx`
+- **check**: `FY25H1 check template.xlsx`
 
 3. Run the script. It will loop through the mapped columns in the following tabs:
 - `MANAGER`
@@ -77,7 +77,7 @@ If differences are found in the formulas between the Matrix and check sheets, th
 - `check LAE`
 
 4. After execution, the difference report will be saved in the following location:
-- `C:\\Users\\cmazzutt\\Desktop\\Formula Checks\\check_comparison_formulas.xlsx`
+- `C:\\Users\\your_user\\Desktop\\Formula Checks\\check_comparison_formulas.xlsx`
 
 ### **Script Output**
 
