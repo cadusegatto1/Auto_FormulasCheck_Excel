@@ -1,7 +1,7 @@
 ## **Script for Comparing Formulas Between Spreadsheets**
 
 ### **General Description**
-This script was created by Cadu Segatto and is used to compare formulas between two Excel spreadsheets: a matrix spreadsheet (with reference data) and an CHECK spreadsheet (with data to be verified). The script identifies discrepancies between the corresponding formulas and generates a detailed report in an Excel file, listing the differences found.
+This script was created by Cadu Segatto and is used to automate the comparison on formulas between two Excel spreadsheets: a matrix spreadsheet (with reference data) and an CHECK spreadsheet (with data to be verified). The script identifies discrepancies between the corresponding formulas and generates a detailed report in an Excel file, listing the differences found.
 
 ### **How ​​it works**
 
