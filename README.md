@@ -11,7 +11,7 @@ The script loads two spreadsheets:
 
 - **Matrix**: Reference spreadsheet containing the expected formulas.
 
-- **check**: Spreadsheet where the formulas are verified against the Matrix.
+- **Check**: Spreadsheet where the formulas are verified against the Matrix.
 
 2. **Column Mapping**:
 
@@ -23,20 +23,20 @@ For each mapped column, the script compares the formulas between the two sheets.
 
 4. **Difference Report**:
 
-If differences are found in the formulas between the Matrix and check sheets, the discrepancies are stored in a list. The report is then generated and exported to a separate Excel file containing:
+If differences are found in the formulas between the Matrix and Check sheets, the discrepancies are stored in a list. The report is then generated and exported to a separate Excel file containing:
 - The tab (sheet) where the difference was found.
 - The cell and formula from the Matrix sheet.
-- The corresponding cell and formula from the check sheet.
+- The corresponding cell and formula from the Check sheet.
 
 ### **Functions**
 
 #### 1. **compare_formulas()**
 - **Parameters**:
 - `ws_matriz`: Tab of the Matrix sheet.
-- `ws_check`: check spreadsheet tab.
+- `ws_check`: Check spreadsheet tab.
 - `column_mapping`: Dictionary with the mapping of columns between the two spreadsheets.
 - `row_matriz`: Number of the initial row in the Matrix spreadsheet.
-- `row_check`: Number of the initial row in the check spreadsheet.
+- `row_check`: Number of the initial row in the Check spreadsheet.
 - `differences`: List where the discrepancies will be stored.
 - `sheet_name`: Name of the tab where the comparison is being made.
 - **Description**: Compares the formulas between two mapped columns from different spreadsheets and, if there are differences, stores them in the `differences` list.
@@ -44,12 +44,12 @@ If differences are found in the formulas between the Matrix and check sheets, th
 #### 2. **compare_formulas_in_sheet()**
 - **Parameters**:
 - `ws_matriz`: Tab of the Matrix spreadsheet.
-- `wb_check`: Object representing the check spreadsheet.
+- `wb_check`: Object representing the Check spreadsheet.
 - `sheet_name`: Name of the tab where the comparison is being made.
 - `row_budget`: Budget line number in the Matrix.
 - `column_mapping`: Dictionary with the column mapping.
 - `row_matriz`: Starting line for verification in the Matrix.
-- `row_check`: Starting line for verification in check.
+- `row_check`: Starting line for verification in Check.
 - `differences`: List where the discrepancies will be stored.
 - **Description**: Performs the comparison of formulas for a specific tab, using the mapping of defined columns and rows.
 
@@ -63,21 +63,21 @@ If differences are found in the formulas between the Matrix and check sheets, th
 - `pandas`
 
 2. Open the script and adjust the paths of the Excel files you want to compare:
-- **Matrix**: `QR improvements for FY25 H1.xlsx`
-- **check**: `FY25H1 check template.xlsx`
+- **Matrix**: `Source_Formulas.xlsx`
+- **Check**: `Check.xlsx`
 
 3. Run the script. It will loop through the mapped columns in the following tabs:
 - `MANAGER`
 - `ANZ`
-- `check GSA`
+- `Check GSA`
 - `CHINA`
 - `INDIA`
 - `JAPAN`
 - `SEAK`
-- `check LAE`
+- `Check LAE`
 
 4. After execution, the difference report will be saved in the following location:
-- `C:\\Users\\your_user\\Desktop\\Formula Checks\\check_comparison_formulas.xlsx`
+- `C:\\Users\\your_user\\Desktop\\Formula Checks\\comparison_formulas.xlsx`
 
 ### **Script Output**
 
